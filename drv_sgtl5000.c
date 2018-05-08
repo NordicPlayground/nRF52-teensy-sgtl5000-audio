@@ -214,6 +214,8 @@ static void i2s_data_handler(nrf_drv_i2s_buffers_t const * p_released,
         if (m_state == SGTL5000_STATE_RUNNING)
         {
             // If we are forwarding events to the application, we let the "old" event handler take care of that
+            APP_ERROR_CHECK(nrf_drv_i2s_next_buffers_set(p_released));
+            
             i2s_data_handler_old(p_released->p_rx_buffer, (uint32_t *)p_released->p_tx_buffer, m_external_i2s_buffer.buffer_size_words/2);
         }
         else if (m_state == SGTL5000_STATE_RUNNING_LOOPBACK)
@@ -229,21 +231,21 @@ static void i2s_data_handler(nrf_drv_i2s_buffers_t const * p_released,
         {
             /* Play sample! 16kHz sample played on 32kHz frequency! If frequency is changed, this approach needs to change. */
             APP_ERROR_CHECK(nrf_drv_i2s_next_buffers_set(p_released));
+            
+            /* Make sure settings have not changed - as this sample playback highly depends on the I2S settings */
             APP_ERROR_CHECK_BOOL(m_i2s_config.mck_setup == NRF_I2S_MCK_32MDIV8);     // If these change, please change this function as well
             APP_ERROR_CHECK_BOOL(m_i2s_config.ratio == NRF_I2S_RATIO_128X);          // If these change, please change this function as well
             // Also depends on alignement, format, and channels!
             
             /* Extract buffer pointer for TX I2S buffer - uint16_t to match up with sample */
             uint16_t * p_buffer  = (uint16_t *) p_released->p_tx_buffer;
-            uint32_t * p_buffer32  = (uint32_t *) p_released->p_tx_buffer;
             /* Since the I2S buffer is double buffered, we are only looking at the requested half. And since channels is LEFT, we only look at half of this as well. */
             uint32_t i2s_buffer_size_words = m_external_i2s_buffer.buffer_size_words/2;
             /* For this requested half, we only need half the amount of sample values because the sample is 16kHz and we are running 32kHz. See NRF_I2S_MCK_32MDIV8 and RATIO. */
-            uint32_t pcm_stream_buffer_size = i2s_buffer_size_words;  // Because buffer is int16_t, we need i2s_buffer_size_words values to get half - format LEFT means we need half the I2S buffer
-            int16_t pcm_stream[pcm_stream_buffer_size];
+            int16_t pcm_stream[i2s_buffer_size_words];
             
             /* Clear pcm buffer */
-            memset(pcm_stream, 0, pcm_stream_buffer_size);
+            memset(pcm_stream, 0, sizeof(pcm_stream));
 
             /* Check if playing the next part of the sample will exceed the sample size, if not, copy over part of sample to be played */
             if (smpl_idx < SAMPLE_LEN)
