@@ -48,6 +48,95 @@
 #endif
 // <h> Application 
 
+// <e> TWI_ENABLED - nrf_drv_twi - TWI/TWIM peripheral driver
+//==========================================================
+#ifndef TWI_ENABLED
+#define TWI_ENABLED 1
+#endif
+// <o> TWI_DEFAULT_CONFIG_FREQUENCY  - Frequency
+ 
+// <26738688=> 100k 
+// <67108864=> 250k 
+// <104857600=> 400k 
+
+#ifndef TWI_DEFAULT_CONFIG_FREQUENCY
+#define TWI_DEFAULT_CONFIG_FREQUENCY 26738688
+#endif
+
+// <q> TWI_DEFAULT_CONFIG_CLR_BUS_INIT  - Enables bus clearing procedure during init
+ 
+
+#ifndef TWI_DEFAULT_CONFIG_CLR_BUS_INIT
+#define TWI_DEFAULT_CONFIG_CLR_BUS_INIT 0
+#endif
+
+// <q> TWI_DEFAULT_CONFIG_HOLD_BUS_UNINIT  - Enables bus holding after uninit
+ 
+
+#ifndef TWI_DEFAULT_CONFIG_HOLD_BUS_UNINIT
+#define TWI_DEFAULT_CONFIG_HOLD_BUS_UNINIT 0
+#endif
+
+// <o> TWI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+ 
+
+// <i> Priorities 0,2 (nRF51) and 0,1,4,5 (nRF52) are reserved for SoftDevice
+// <0=> 0 (highest) 
+// <1=> 1 
+// <2=> 2 
+// <3=> 3 
+// <4=> 4 
+// <5=> 5 
+// <6=> 6 
+// <7=> 7 
+
+#ifndef TWI_DEFAULT_CONFIG_IRQ_PRIORITY
+#define TWI_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// <e> TWI0_ENABLED - Enable TWI0 instance
+//==========================================================
+#ifndef TWI0_ENABLED
+#define TWI0_ENABLED 0
+#endif
+// <q> TWI0_USE_EASY_DMA  - Use EasyDMA (if present)
+ 
+
+#ifndef TWI0_USE_EASY_DMA
+#define TWI0_USE_EASY_DMA 0
+#endif
+
+// </e>
+
+// <e> TWI1_ENABLED - Enable TWI1 instance
+//==========================================================
+#ifndef TWI1_ENABLED
+#define TWI1_ENABLED 1
+#endif
+// <q> TWI1_USE_EASY_DMA  - Use EasyDMA (if present)
+ 
+
+#ifndef TWI1_USE_EASY_DMA
+#define TWI1_USE_EASY_DMA 1
+#endif
+
+// </e>
+
+// <q> TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED  - Enables nRF52 anomaly 109 workaround for TWIM.
+ 
+
+// <i> The workaround uses interrupts to wake up the CPU by catching
+// <i> the start event of zero-frequency transmission, clear the 
+// <i> peripheral, set desired frequency, start the peripheral, and
+// <i> the proper transmission. See more in the Errata document or
+// <i> Anomaly 109 Addendum located at https://infocenter.nordicsemi.com/
+
+#ifndef TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+
+// </e>
+
 //==========================================================
 // <o> I2S_SDIN_PIN  - Pin number
  
@@ -1201,7 +1290,7 @@
 // <4=> Debug 
 
 #ifndef NRF_LOG_DEFAULT_LEVEL
-#define NRF_LOG_DEFAULT_LEVEL 3
+#define NRF_LOG_DEFAULT_LEVEL 4
 #endif
 
 // <q> NRF_LOG_DEFERRED  - Enable deffered logger.
@@ -1614,6 +1703,57 @@
 #endif
 
 // </e>
+
+// <e> I2S_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef I2S_CONFIG_LOG_ENABLED
+#define I2S_CONFIG_LOG_ENABLED 1
+#endif
+// <o> I2S_CONFIG_LOG_LEVEL  - Default Severity level
+ 
+// <0=> Off 
+// <1=> Error 
+// <2=> Warning 
+// <3=> Info 
+// <4=> Debug 
+
+#ifndef I2S_CONFIG_LOG_LEVEL
+#define I2S_CONFIG_LOG_LEVEL 4
+#endif
+
+// <o> I2S_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+ 
+// <0=> Default 
+// <1=> Black 
+// <2=> Red 
+// <3=> Green 
+// <4=> Yellow 
+// <5=> Blue 
+// <6=> Magenta 
+// <7=> Cyan 
+// <8=> White 
+
+#ifndef I2S_CONFIG_INFO_COLOR
+#define I2S_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> I2S_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+ 
+// <0=> Default 
+// <1=> Black 
+// <2=> Red 
+// <3=> Green 
+// <4=> Yellow 
+// <5=> Blue 
+// <6=> Magenta 
+// <7=> Cyan 
+// <8=> White 
+
+#ifndef I2S_CONFIG_DEBUG_COLOR
+#define I2S_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>  I2S_CONFIG_LOG_ENABLED
 
 // <e> LPCOMP_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
