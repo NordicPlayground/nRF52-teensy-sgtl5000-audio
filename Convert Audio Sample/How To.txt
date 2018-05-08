@@ -1,0 +1,6 @@
+
+Pyhton script used to convert from .wav to .c;
+$ python conv.py wav2c input.wav output.c
+
+To match the already existing samples in the repo, you need a mono .wav file with 16kHz sample. Can be done with sox:
+$ sox input.wav -r 16000 -b 16 -e signed-integer -c 1 output.wav

@@ -1,0 +1,3 @@
+Soundfile >= 0.9.0.post1
+numpy >= 1.14.0
+intelhex >= 2.2.1
