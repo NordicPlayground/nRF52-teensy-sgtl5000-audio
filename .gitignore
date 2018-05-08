@@ -1,0 +1,7 @@
+/pca10040/blank/ses/Output/
+/pca10040/blank/arm5_no_packs/_build
+/pca10040/blank/arm5_no_packs/RTE
+*.jlink
+*JLinkLog*
+*JLinkSettings.ini
+*.uvguix.*
