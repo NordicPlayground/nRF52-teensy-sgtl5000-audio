@@ -10,7 +10,7 @@ This example basically just shows how the I2S peripheral (along with the TWI) ca
 to interface an audio device to retrieve and send audio data. 
 
 Components used for this example:
-- nRF52-DK, https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF52-DK
+- nRF52-DK, https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF52-DK (nRF52840-DK can also be used)
 - Teensy Audio Adapter Board, https://www.pjrc.com/store/teensy3_audio.html
 - Teensy Arduino Shield Adapter, https://www.sparkfun.com/products/13288
 - MIC Microphone: I unfortunately do not have any datasheet or reference to the microphone that was used 
@@ -18,6 +18,12 @@ for this example. It looks like a standard MIC/GND microphone. See image [What t
 - Option instead of MIC microphone: LINEIN MEMS Microphone SPW2430, https://www.amazon.com/gp/product/B015HKGPCY/
     - If you are using these MEMEs microphones, adding a windscreen make the audio a whole lot better. I used these http://a.co/9Ozps5X.
 
+<dl>
+  <dt>UPDATE:</dt>
+    <dd> 
+      Support for the nRF52840-DK has now been added!
+    </dd>
+</dl>
 
 ## Comments
 <dl>
@@ -49,7 +55,7 @@ for this example. It looks like a standard MIC/GND microphone. See image [What t
 
 
 ## Running the example
-To run this example on the nRF52-DK (nRF52832-DK), a couple of things has to be set up.
+To run this example on the nRF52-DK (nRF52832-DK, or the nRF52840-DK - pin definitions might differ for this board), a couple of things has to be set up.
 
 Please note the volume level warning as noted earlier. Depending on your microphone and speakers, 
 certain dB settings in the header/source driver files might have to be changed to provide an acceptable 
